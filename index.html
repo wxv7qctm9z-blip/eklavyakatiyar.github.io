@@ -3,20 +3,18 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Your Blog</title>
+<title>Eklavya Katiyar</title>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet" />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg:       #f5f5f3;
-    --white:    #ffffff;
-    --black:    #111111;
-    --blue:     #1847d4;
-    --blue-bg:  #eef1fd;
-    --grey:     #888888;
-    --line:     #e4e4e0;
-    --font:     'Geist', system-ui, sans-serif;
+    --bg:      #ffffff;
+    --black:   #111111;
+    --grey:    #888888;
+    --grey2:   #bbbbbb;
+    --line:    #e8e8e8;
+    --font:    'Geist', system-ui, sans-serif;
   }
 
   body {
@@ -33,7 +31,7 @@
   /* NAV */
   nav {
     position: sticky; top: 0; z-index: 50;
-    background: rgba(245,245,243,0.9);
+    background: rgba(255,255,255,0.92);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--line);
     display: flex; align-items: center; justify-content: space-between;
@@ -76,92 +74,25 @@
     margin-bottom: 0.55rem;
   }
 
-  .page-heading h1 span { color: var(--blue); }
-
   .page-heading p {
     font-size: 0.88rem;
     color: var(--grey);
     line-height: 1.8;
-    max-width: 400px;
+    max-width: 420px;
   }
 
-  /* POST LIST */
-  .posts { padding: 0.5rem 0 5rem; }
-
-  .post-item {
+  /* WIP */
+  .wip {
+    padding: 5rem 0 8rem;
     display: flex;
-    align-items: flex-start;
-    gap: 1.1rem;
-    padding: 1.5rem 0.75rem;
-    border-bottom: 1px solid var(--line);
-    cursor: pointer;
-    border-radius: 10px;
-    margin: 0 -0.75rem;
-    transition: background 0.15s;
-    opacity: 0;
-    animation: fadeUp 0.35s ease both;
+    align-items: center;
   }
 
-  .post-item:nth-child(1) { animation-delay: 0.10s; }
-  .post-item:nth-child(2) { animation-delay: 0.17s; }
-  .post-item:nth-child(3) { animation-delay: 0.24s; }
-  .post-item:nth-child(4) { animation-delay: 0.31s; }
-  .post-item:nth-child(5) { animation-delay: 0.38s; }
-
-  .post-item:hover { background: var(--white); }
-  .post-item:hover .post-title { color: var(--blue); }
-
-  .post-emoji {
-    width: 40px; height: 40px;
-    background: var(--blue-bg);
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.1rem;
-    flex-shrink: 0;
-    margin-top: 1px;
-    transition: transform 0.2s;
-  }
-
-  .post-item:hover .post-emoji { transform: scale(1.1); }
-
-  .post-content { flex: 1; min-width: 0; }
-
-  .post-tag {
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    color: var(--blue);
-    margin-bottom: 0.25rem;
-  }
-
-  .post-title {
-    font-size: 0.97rem;
-    font-weight: 500;
-    line-height: 1.45;
-    letter-spacing: -0.01em;
-    margin-bottom: 0.3rem;
-    transition: color 0.15s;
-  }
-
-  .post-excerpt {
-    font-size: 0.84rem;
-    color: var(--grey);
-    line-height: 1.65;
-    margin-bottom: 0.5rem;
-  }
-
-  .post-meta {
-    font-size: 0.75rem;
-    color: var(--grey);
-    display: flex; gap: 0.45rem; align-items: center;
-  }
-
-  .dot {
-    width: 2.5px; height: 2.5px;
-    background: var(--grey);
-    border-radius: 50%;
-    opacity: 0.4;
+  .wip-text {
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    color: var(--grey2);
   }
 
   /* SINGLE POST */
@@ -190,7 +121,7 @@
     flex-shrink: 0;
   }
 
-  .back-btn:hover .back-arrow { background: #d6d6d2; }
+  .back-btn:hover .back-arrow { background: #d8d8d8; }
 
   .post-header {
     padding-bottom: 1.75rem;
@@ -198,7 +129,14 @@
     margin-bottom: 2rem;
   }
 
-  .post-header .post-tag { margin-bottom: 0.6rem; }
+  .post-tag {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin-bottom: 0.6rem;
+  }
 
   .post-header h1 {
     font-size: 1.6rem;
@@ -212,6 +150,13 @@
     font-size: 0.76rem;
     color: var(--grey);
     display: flex; gap: 0.45rem; align-items: center;
+  }
+
+  .dot {
+    width: 2.5px; height: 2.5px;
+    background: var(--grey);
+    border-radius: 50%;
+    opacity: 0.4;
   }
 
   .post-body p {
@@ -230,10 +175,10 @@
   }
 
   .post-body blockquote {
-    border-left: 2px solid var(--blue);
+    border-left: 2px solid var(--grey2);
     margin: 1.75rem 0;
     padding: 0.8rem 1.2rem;
-    background: var(--blue-bg);
+    background: #f7f7f7;
     border-radius: 0 8px 8px 0;
     font-size: 0.94rem;
     color: var(--black);
@@ -251,8 +196,6 @@
     color: #333;
     margin-bottom: 0.25rem;
   }
-
-  .post-body ul li::marker { color: var(--blue); }
 
   .post-end {
     margin-top: 3rem;
@@ -288,13 +231,14 @@
     .wrap { padding: 0 1.25rem; }
     .page-heading h1 { font-size: 1.55rem; }
     .nav-links { display: none; }
+    .wip-text { font-size: 1.1rem; }
   }
 </style>
 </head>
 <body>
 
 <nav>
-  <span class="nav-name" onclick="goHome()">Your Blog</span>
+  <span class="nav-name" onclick="goHome()">Eklavya Katiyar</span>
   <ul class="nav-links">
     <li><a href="#" onclick="goHome(); return false;">Home</a></li>
     <li><a href="#">Projects</a></li>
@@ -305,13 +249,17 @@
 <div id="homeView">
   <div class="wrap">
     <div class="page-heading">
-      <h1>Writing things I <span>actually mean.</span></h1>
-      <p>Ideas, case studies, and things I'm figuring out — mostly around data, AI, and how stuff works.</p>
+      <h1>Documenting the journey.</h1>
+      <p>Ideas, case studies, and things I'm figuring out — mostly around data, AI and how business works.</p>
     </div>
-    <div class="posts" id="postList"></div>
+
+    <div class="wip">
+      <span class="wip-text">WORK IN PROGRESS.........</span>
+    </div>
   </div>
+
   <footer>
-    <span>Your Name · 2025</span>
+    <span>Eklavya Katiyar · 2026</span>
     <span>Built with HTML</span>
   </footer>
 </div>
@@ -341,132 +289,13 @@
 </div>
 
 <script>
-const posts = [
-  {
-    emoji: "📊",
-    tag: "Data Science",
-    title: "Why most data charts are quietly lying to you",
-    excerpt: "Charts feel like facts. They're not — they're choices. Here's what to look for.",
-    date: "Apr 12, 2025", read: "6 min",
-    body: `
-      <p>Every chart is an argument. The moment someone decides what to include and what to leave out, they've taken a position. Most people treat visualisations as neutral — they're not.</p>
-      <h2>The truncated Y-axis trick</h2>
-      <p>The most common manipulation is starting the Y-axis at a number other than zero. This makes a 2% change look like a 40% change. Cable news does this constantly. So do startup pitch decks.</p>
-      <blockquote>Show me a chart and I'll show you a choice someone made.</blockquote>
-      <p>It's not always deliberate deception — sometimes it's just a designer trying to make the chart look cleaner. But the effect is the same: your brain gets fooled.</p>
-      <h2>What to check every time</h2>
-      <ul>
-        <li>Does the Y-axis start at zero?</li>
-        <li>Are the intervals on the axis consistent?</li>
-        <li>What's the sample size — is it big enough to mean anything?</li>
-        <li>What's not labelled, and why?</li>
-      </ul>
-      <p>Once you start seeing it, you can't unsee it. Which is exactly the point.</p>
-    `
-  },
-  {
-    emoji: "🤖",
-    tag: "Machine Learning",
-    title: "I built a sentiment classifier with no libraries — here's what I learned",
-    excerpt: "Pure NumPy, no shortcuts. Understanding what's actually happening inside a model.",
-    date: "Mar 28, 2025", read: "8 min",
-    body: `
-      <p>I'd been using Hugging Face and scikit-learn for months before realising I had no idea what was actually happening inside. So I built a sentiment classifier from scratch with just NumPy.</p>
-      <h2>The setup</h2>
-      <p>Goal: take a movie review, return positive or negative. I used the IMDB dataset — 50,000 labelled reviews, split evenly. Simple and clean.</p>
-      <h2>Bag of words</h2>
-      <p>First approach: bag-of-words with naive Bayes. No embeddings, no context window, just word counts. It hit 83% accuracy on the test set.</p>
-      <blockquote>The simplest model that works is almost always the right starting point.</blockquote>
-      <p>The interesting part was seeing where it failed. Reviews with negation — "not bad", "didn't disappoint" — consistently tripped it up. Bag-of-words has no concept of word order.</p>
-      <h2>What actually changed</h2>
-      <p>Building it yourself forces you to understand every assumption inside the model. You can't outsource that understanding to a pip install.</p>
-    `
-  },
-  {
-    emoji: "🛵",
-    tag: "Case Study",
-    title: "How Zomato predicts your delivery time — my best guess",
-    excerpt: "Their ETAs are surprisingly accurate. Here's how I think they do it.",
-    date: "Mar 14, 2025", read: "10 min",
-    body: `
-      <p>Zomato's estimated delivery times are good. Really good. I tracked them for a couple of months and they're usually within 3 minutes of actual delivery. That's a hard problem to solve.</p>
-      <h2>The obvious inputs</h2>
-      <p>Distance, restaurant prep time history, traffic, time of day, day of week. Those are the easy ones.</p>
-      <h2>The less obvious inputs</h2>
-      <p>Weather. Number of active orders at that restaurant right now. The specific delivery partner's historical speed. These are the ones that separate a decent ETA from a great one.</p>
-      <blockquote>The hardest part of an ETA system isn't the model — it's the features.</blockquote>
-      <h2>The model itself</h2>
-      <p>Based on Zomato's engineering blog, they're almost certainly using gradient-boosted trees with real-time feature updates. The unsolvable part is restaurant unpredictability — a kitchen that normally takes 12 minutes suddenly takes 30 because of a large order. No model fully handles that.</p>
-    `
-  },
-  {
-    emoji: "🎂",
-    tag: "Probability",
-    title: "The birthday problem is weirder than you think",
-    excerpt: "23 people, over 50% chance of a shared birthday. Here's why your gut is wrong.",
-    date: "Feb 22, 2025", read: "5 min",
-    body: `
-      <p>You've heard this one. In a room of 23 people, there's more than a 50% chance two of them share a birthday. Most people hear it, nod, accept it — and still have zero intuition for why it's true.</p>
-      <h2>The counting error</h2>
-      <p>The mistake is thinking about pairs from your own perspective. The birthday problem is about any two people, not you specifically.</p>
-      <blockquote>In a room of 23 people, you have 253 unique pairs. That's the number that matters.</blockquote>
-      <p>253 pairs, each with roughly a 1-in-365 chance of a match. The probability of at least one match gets surprisingly high very fast.</p>
-      <h2>The simulation</h2>
-      <p>I ran 100,000 trials in Python. 23 people: 50.7% match rate. 30 people: 70.6%. 50 people: 97%. Your gut is reliably wrong about this kind of thing — and that matters a lot in ML.</p>
-    `
-  },
-  {
-    emoji: "🎓",
-    tag: "Opinion",
-    title: "Why I'm planning an MBA four years before I can apply",
-    excerpt: "Planning a major bet in advance isn't overthinking. It's the only way to do it properly.",
-    date: "Feb 10, 2025", read: "7 min",
-    body: `
-      <p>I'm about to start a BSc in Data Science & AI. The MBA — if I go for it — is at least four years away. Most people would say thinking about it now is premature. I think it's exactly the right time.</p>
-      <h2>Why it matters now</h2>
-      <p>Big career decisions have long lead times. The experiences and credentials that make you a strong MBA candidate need years to build. If FMS Delhi is the target, you need a CAT score in the 99th percentile. That's not something you prepare for in a month.</p>
-      <blockquote>Planning a bet four years in advance isn't overthinking. It's the only way to make the bet properly.</blockquote>
-      <h2>How I'm thinking about it</h2>
-      <p>Step one: figure out what I actually want the MBA to do for me. Step two: work backwards to what I need to have done before applying. Step three: build habits now that compound toward those outcomes. The goal isn't obsession — it's optionality.</p>
-    `
-  }
-];
-
-function renderHome() {
-  document.getElementById('postList').innerHTML = posts.map((p, i) => `
-    <div class="post-item" onclick="openPost(${i})">
-      <div class="post-emoji">${p.emoji}</div>
-      <div class="post-content">
-        <div class="post-tag">${p.tag}</div>
-        <div class="post-title">${p.title}</div>
-        <div class="post-excerpt">${p.excerpt}</div>
-        <div class="post-meta">
-          <span>${p.date}</span><span class="dot"></span><span>${p.read} read</span>
-        </div>
-      </div>
-    </div>
-  `).join('');
-}
-
-function openPost(i) {
-  const p = posts[i];
-  document.getElementById('pTag').textContent = p.tag;
-  document.getElementById('pTitle').textContent = p.title;
-  document.getElementById('pDate').textContent = p.date;
-  document.getElementById('pRead').textContent = p.read + ' read';
-  document.getElementById('pBody').innerHTML = p.body;
-  document.getElementById('homeView').classList.add('hidden');
-  document.getElementById('postPage').classList.add('active');
-  window.scrollTo(0, 0);
-}
+const posts = [];
 
 function goHome() {
   document.getElementById('homeView').classList.remove('hidden');
   document.getElementById('postPage').classList.remove('active');
   window.scrollTo(0, 0);
 }
-
-renderHome();
 </script>
 </body>
 </html>
