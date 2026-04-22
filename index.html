@@ -36,7 +36,7 @@
     border-bottom: 1px solid var(--line);
     display: flex; align-items: center; justify-content: space-between;
     padding: 0 2rem; height: 52px;
-    animation: fromTop 0.4s ease both;
+    animation: fromTop 0.2s ease both;
   }
 
   .nav-name {
@@ -44,7 +44,9 @@
     font-weight: 600;
     cursor: pointer;
     letter-spacing: -0.02em;
+    transition: color 0.12s;
   }
+  .nav-name:hover { color: var(--grey); }
 
   .nav-links {
     display: flex; gap: 2rem; list-style: none;
@@ -52,15 +54,18 @@
     color: var(--grey);
   }
 
-  .nav-links a { transition: color 0.15s; }
-  .nav-links a:hover { color: var(--black); }
+  .nav-links a { transition: color 0.12s; }
+  .nav-links a:hover { color: var(--grey2); }
+  .nav-links a.active { color: var(--black); }
 
   /* WRAP */
   .wrap { max-width: 640px; margin: 0 auto; padding: 0 2rem; }
 
-  /* HOME */
-  #homeView { animation: fadeUp 0.4s 0.05s ease both; }
+  /* VIEWS */
+  .view { display: none; }
+  .view.active { display: block; animation: fadeUp 0.18s ease both; }
 
+  /* PAGE HEADING */
   .page-heading {
     padding: 4rem 0 2.5rem;
     border-bottom: 1px solid var(--line);
@@ -81,47 +86,68 @@
     max-width: 420px;
   }
 
-  /* WIP */
-  .wip {
-    padding: 5rem 0 8rem;
+  /* POST LIST */
+  .post-list { padding: 0.5rem 0 4rem; }
+
+  .post-item {
     display: flex;
-    align-items: center;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--line);
+    cursor: pointer;
+    transition: none;
   }
 
-  .wip-text {
-    font-size: 1.5rem;
-    font-weight: 300;
-    letter-spacing: 0.04em;
+  .post-item:hover .post-item-title { color: var(--grey); }
+  .post-item:hover .post-item-date { color: var(--grey2); }
+
+  .post-item-title {
+    font-size: 0.92rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    transition: color 0.12s;
+  }
+
+  .post-item-date {
+    font-size: 0.76rem;
     color: var(--grey2);
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: color 0.12s;
+  }
+
+  /* WIP replaced — section label */
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--grey2);
+    padding: 2rem 0 0;
   }
 
   /* SINGLE POST */
-  #postPage { display: none; }
-  #postPage.active { display: block; animation: fadeUp 0.3s ease both; }
-  #homeView.hidden { display: none; }
-
   .back-btn {
     display: inline-flex; align-items: center; gap: 0.4rem;
     margin: 2rem 0 2.5rem;
     font-size: 0.76rem;
     color: var(--grey);
     cursor: pointer;
-    transition: color 0.15s;
     user-select: none;
+    transition: color 0.12s;
   }
 
-  .back-btn:hover { color: var(--black); }
+  .back-btn:hover { color: var(--grey2); }
 
   .back-arrow {
     width: 18px; height: 18px;
     background: var(--line);
     border-radius: 5px;
     display: flex; align-items: center; justify-content: center;
-    transition: background 0.15s;
     flex-shrink: 0;
   }
-
-  .back-btn:hover .back-arrow { background: #d8d8d8; }
 
   .post-header {
     padding-bottom: 1.75rem;
@@ -166,37 +192,6 @@
     margin-bottom: 1.35rem;
   }
 
-  .post-body h2 {
-    font-size: 1.05rem;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    margin: 2.25rem 0 0.8rem;
-    color: var(--black);
-  }
-
-  .post-body blockquote {
-    border-left: 2px solid var(--grey2);
-    margin: 1.75rem 0;
-    padding: 0.8rem 1.2rem;
-    background: #f7f7f7;
-    border-radius: 0 8px 8px 0;
-    font-size: 0.94rem;
-    color: var(--black);
-    line-height: 1.7;
-  }
-
-  .post-body ul {
-    padding-left: 1.2rem;
-    margin-bottom: 1.35rem;
-  }
-
-  .post-body ul li {
-    font-size: 0.97rem;
-    line-height: 1.85;
-    color: #333;
-    margin-bottom: 0.25rem;
-  }
-
   .post-end {
     margin-top: 3rem;
     padding: 1.25rem 0 5rem;
@@ -215,9 +210,21 @@
     display: flex; justify-content: space-between;
   }
 
+  .wip-msg {
+    padding: 3.5rem 0 8rem;
+    font-size: 0.88rem;
+    color: var(--grey2);
+    font-weight: 300;
+  }
+  .placeholder {
+    padding: 5rem 0 8rem;
+    font-size: 0.88rem;
+    color: var(--grey2);
+  }
+
   /* ANIMATIONS */
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(12px); }
+    from { opacity: 0; transform: translateY(8px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 
@@ -231,42 +238,85 @@
     .wrap { padding: 0 1.25rem; }
     .page-heading h1 { font-size: 1.55rem; }
     .nav-links { display: none; }
-    .wip-text { font-size: 1.1rem; }
   }
 </style>
 </head>
 <body>
 
 <nav>
-  <span class="nav-name" onclick="goHome()">Eklavya Katiyar</span>
+  <span class="nav-name" onclick="navigate('home')">Eklavya Katiyar</span>
   <ul class="nav-links">
-    <li><a href="#" onclick="goHome(); return false;">Home</a></li>
-    <li><a href="#">Projects</a></li>
-    <li><a href="#">About</a></li>
+    <li><a href="#" id="nav-home"   onclick="navigate('home');     return false;">Home</a></li>
+    <li><a href="#" id="nav-posts"  onclick="navigate('posts');    return false;">Posts</a></li>
+    <li><a href="#" id="nav-projects" onclick="navigate('projects'); return false;">Projects</a></li>
+    <li><a href="#" id="nav-about"  onclick="navigate('about');    return false;">About</a></li>
   </ul>
 </nav>
 
-<div id="homeView">
+<!-- HOME -->
+<div id="view-home" class="view active">
   <div class="wrap">
     <div class="page-heading">
       <h1>Documenting the journey.</h1>
       <p>Ideas, case studies, and things I'm figuring out — mostly around data, AI and how business works.</p>
     </div>
-
-    <div class="wip">
-      <span class="wip-text">WORK IN PROGRESS.........</span>
-    </div>
+    <div class="wip-msg">A lot more in progress — check back soon.</div>
   </div>
-
   <footer>
     <span>Eklavya Katiyar · 2026</span>
     <span>Built with HTML</span>
   </footer>
 </div>
 
-<div id="postPage">
+<!-- POSTS -->
+<div id="view-posts" class="view">
   <div class="wrap">
-    <div class="back-btn" onclick="goHome()">
+    <div class="page-heading">
+      <h1>Posts</h1>
+      <p>Things I write when something's worth putting down.</p>
+    </div>
+    <div class="post-list" id="posts-post-list"></div>
+  </div>
+  <footer>
+    <span>Eklavya Katiyar · 2026</span>
+    <span>Built with HTML</span>
+  </footer>
+</div>
+
+<!-- PROJECTS -->
+<div id="view-projects" class="view">
+  <div class="wrap">
+    <div class="page-heading">
+      <h1>Projects</h1>
+      <p>Things I've built or am building.</p>
+    </div>
+    <div class="placeholder">Coming soon.</div>
+  </div>
+  <footer>
+    <span>Eklavya Katiyar · 2026</span>
+    <span>Built with HTML</span>
+  </footer>
+</div>
+
+<!-- ABOUT -->
+<div id="view-about" class="view">
+  <div class="wrap">
+    <div class="page-heading">
+      <h1>About</h1>
+      <p>A little about who I am.</p>
+    </div>
+    <div class="placeholder">Coming soon.</div>
+  </div>
+  <footer>
+    <span>Eklavya Katiyar · 2026</span>
+    <span>Built with HTML</span>
+  </footer>
+</div>
+
+<!-- SINGLE POST -->
+<div id="view-post" class="view">
+  <div class="wrap">
+    <div class="back-btn" id="back-btn">
       <span class="back-arrow">
         <svg width="6" height="10" viewBox="0 0 6 10" fill="none">
           <path d="M5 1L1 5L5 9" stroke="#888" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
@@ -289,13 +339,65 @@
 </div>
 
 <script>
-const posts = [];
+const posts = [
+  {
+    id: 1,
+    title: "22 April 2026 — Ice Breaking",
+    date: "22 Apr 2026",
+    tag: "Reflection",
+    read: "2 min read",
+    body: `
+      <p>I define noise in a couple of ways — external and internal. While the names sound fancy, I feel both have their good and bad sides. External noise can be good: you get to know what people are thinking in a particular situation — it works as data. The bad part is you get lost in other people's thoughts and opinions. This one is manageable with some awareness. Internal noise is the big fish. Identifying it is difficult because it hides in the form of novel thoughts, intelligent opinions, a master plan, and what not. It takes me a lot of time to understand it myself. I spend time thinking about some "important" thing, but the truth is I'm fooling my mind into looking productive — and only after I've wasted the time do I catch it. I am aware that this is a thing, and maybe with more practice I'll learn to stop before an hour disappears. The thing is, internal noise is hidden, and our brain is too weak and too obsessed with these wasteful but noble-feeling thoughts to let them go. It's OK with wasted time but deeply uncomfortable with accepting that none of it did any good.</p>
+      <p>Contradicting your own thoughts is useful but a pretty delicate thing. It can help, or it can make you lose confidence in yourself. The only way I've found to tackle it is to let the question sit and reflect. Reflecting helps with a lot of things, but the main thing it gives you is clarity about yourself — at least that's what it gave me.</p>
+    `
+  }
+];
 
-function goHome() {
-  document.getElementById('homeView').classList.remove('hidden');
-  document.getElementById('postPage').classList.remove('active');
+let prevView = 'home';
+let currentView = 'home';
+
+function renderPostList(containerId) {
+  const el = document.getElementById(containerId);
+  el.innerHTML = posts.map(p => `
+    <div class="post-item" onclick="openPost(${p.id})">
+      <span class="post-item-title">${p.title}</span>
+      <span class="post-item-date">${p.date}</span>
+    </div>
+  `).join('');
+}
+
+function navigate(view) {
+  if (view === currentView) return;
+  document.getElementById('view-' + currentView).classList.remove('active');
+  document.getElementById('view-' + view).classList.add('active');
+
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  const navEl = document.getElementById('nav-' + view);
+  if (navEl) navEl.classList.add('active');
+
+  prevView = currentView;
+  currentView = view;
   window.scrollTo(0, 0);
 }
+
+function openPost(id) {
+  const post = posts.find(p => p.id === id);
+  if (!post) return;
+
+  document.getElementById('pTag').textContent = post.tag;
+  document.getElementById('pTitle').textContent = post.title;
+  document.getElementById('pDate').textContent = post.date;
+  document.getElementById('pRead').textContent = post.read;
+  document.getElementById('pBody').innerHTML = post.body;
+
+  document.getElementById('back-btn').onclick = () => navigate(currentView === 'post' ? prevView : currentView);
+
+  navigate('post');
+}
+
+// init
+renderPostList('posts-post-list');
+document.getElementById('nav-home').classList.add('active');
 </script>
 </body>
 </html>
